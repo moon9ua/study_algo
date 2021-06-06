@@ -1,26 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+string str;
+list<char> lst;
+int n;
+
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    string str;
     cin >> str;
-
-    list<char> lst; // 이렇게 하는건가? 기억이 안난다.
-
     for (char c : str)
-    {
         lst.push_back(c);
-    }
-
-    int n;
-    cin >> n;
-
     list<char>::iterator cursor = lst.end();
-
+    cin >> n;
     while (n--)
     {
         char c;
