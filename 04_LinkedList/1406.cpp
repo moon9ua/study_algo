@@ -32,11 +32,7 @@ int main()
         else if (c == 'B')
         {
             if (cursor != lst.begin())
-            {
-                list<char>::iterator mover = cursor;
-                mover--;
-                lst.erase(mover);
-            }
+                lst.erase(prev(cursor));
         }
         else if (c == 'P')
         {

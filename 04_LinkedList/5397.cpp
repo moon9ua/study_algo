@@ -2,7 +2,6 @@
 using namespace std;
 
 int n;
-list<char> lst;
 
 int main()
 {
@@ -15,8 +14,9 @@ int main()
         string str;
         cin >> str;
 
-        list<char>::iterator cursor = lst.end();
-        for (char c : str)
+        list<char> lst; // 💭 왜 메모리 누수 발생 안하지?
+        auto cursor = lst.end();
+        for (char &c : str) // 💭 레퍼런스로 하면 더 효율적?
         {
             if (c == '<')
             {
@@ -31,23 +31,19 @@ int main()
             else if (c == '-')
             {
                 if (cursor != lst.begin())
-                {
-                    auto tmp = cursor; // ❓ -가 아닌 --밖에 안돼서... 임시변수 안쓰곤 방법이 없나?
-                    tmp--;
-                    lst.erase(tmp);
-                }
+                    lst.erase(prev(cursor));
             }
             else
-                lst.insert(cursor, c); // 💦 erase와 insert의 위치
+                lst.insert(cursor, c);
         }
         for (char c : lst)
             cout << c;
         cout << '\n';
-        lst.clear(); // ❓ 맞나? 다른 더 좋은 방법 있나?
+        // lst.clear(); // 💭 할 필요 없고 그냥 list 새로 할당하면 될 듯... 왜?
     }
 }
 
 /*
-* vector와 list 모두 사용해서 시간을 비교해봐야... 리스트가 더 빠른가?
+* 뭐가 제일 빠를까? vector보다는 list가 빠른건 맞아?
 * 스택, 덱으로는 어떻게?
 */
