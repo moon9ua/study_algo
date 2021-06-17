@@ -1,3 +1,4 @@
+/*
 class Solution
 {
 public:
@@ -25,5 +26,37 @@ public:
         return ret;
     }
 };
+*/
 
-// 1. 백트래킹 풀이 보고 공부... 꼭 다시 해보자.
+class Solution
+{
+public:
+    const vector<string> dict = {
+        "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+    vector<string> ret;
+
+    void dfs(int idx, string path, string digits)
+    { // & 쓰면 더 효율적인가? 언제 써야할지 모르겠음.
+        if (idx == digits.size())
+        {
+            ret.push_back(path);
+            return;
+        }
+
+        for (auto a : dict[digits[idx] - '0'])
+        {
+            path.push_back(a);
+            dfs(idx + 1, path, digits);
+            path.pop_back();
+        }
+    }
+
+    vector<string> letterCombinations(string digits)
+    {
+        if (digits == "")
+            return {};
+        dfs(0, "", digits);
+        return ret;
+    }
+};
