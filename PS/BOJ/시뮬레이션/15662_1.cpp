@@ -41,10 +41,10 @@ int main()
                 if (circles[circle][cur_top] != circles[circle + 1][right_top])
                     q.push({ circle + 1, dir * -1 });
             }
-            if (cur.first - 1 >= 1 && vis[cur.first - 1] == 0)
+            if (circle - 1 >= 1 && vis[circle - 1] == 0)
             {
-                int cur_top = (top[cur.first] + 6) % 8;
-                int left_top = (top[cur.first - 1] + 2) % 8;
+                int cur_top = (top[circle] + 6) % 8;
+                int left_top = (top[circle - 1] + 2) % 8;
 
                 if (circles[circle][cur_top] != circles[circle - 1][left_top])
                     q.push({ circle - 1, dir * -1 });
